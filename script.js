@@ -251,3 +251,77 @@ const essentialData = bookList.map((book) => ({
 }));
 essentialData;
 console.log(essentialData);
+
+//ARRAY FILTER
+const longbooksWithMovie = bookList
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+longbooksWithMovie;
+
+const adventureBooks = bookList
+  .filter((books) => books.genres.includes("adventure"))
+  .map((book) => book.title);
+console.log(adventureBooks);
+
+//ARRAY REDUCE
+const pagesAllBooks = bookList.reduce((sum, book) => sum + book.pages, 0);
+pagesAllBooks;
+
+//ARRAY SORT
+const arr = [3, 7, 1, 9, 6];
+//a - b is sorted ascending way
+//b - a is sorted descending way
+//const sorted = arr.sort((a, b) => a - b);
+//sorted;
+
+//sort is mutatable, meaning it will change the original arr variable
+//react does not like mutatable
+arr;
+
+//to keep the orriginal alone we add slice(), make a copy of the array
+const newSorted = arr.slice().sort((a, b) => a - b);
+arr;
+newSorted;
+
+const sortedByPages = bookList.slice().sort((a, b) => b.pages - a.pages);
+sortedByPages;
+
+//Working with Immutable Arrays
+// 1) Add a book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling",
+};
+const booksAfterAdd = [...bookList, newBook];
+booksAfterAdd;
+
+// 2) Delete book object from array
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+booksAfterDelete;
+
+// 3) Update book object in the array
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 1 } : book
+);
+booksAfterUpdate;
+
+// VIDEO 30. ASYNCHRONOUS: PROMISES
+
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+// console.log("Jessica To");
+
+// VIDEO 31. ASYNCHRONOUS: ASYNC/AWAIT
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  //console.log(data);
+  return data;
+}
+const y = 0;
+const todos = getTodos();
+console.log(todos);
+console.log("Jessica To 2");
